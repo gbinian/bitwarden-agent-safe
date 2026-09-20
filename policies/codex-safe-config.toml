@@ -1,0 +1,35 @@
+# Optional defense in depth. The plugin facade already omits unrestricted
+# Bitwarden tools. Keep all facade mutations on prompt approval.
+[plugins."bitwarden-agent-safe".mcp_servers.bitwarden_safe]
+enabled = true
+default_tools_approval_mode = "prompt"
+enabled_tools = [
+  "status",
+  "authorize",
+  "unlock",
+  "lock",
+  "sync",
+  "list_item_metadata",
+  "get_item_metadata",
+  "create_generated_login",
+  "create_folder",
+  "profile_propose",
+  "profile_list",
+  "profile_request_approval",
+  "profile_run",
+]
+
+[plugins."bitwarden-agent-safe".mcp_servers.bitwarden_safe.tools.status]
+approval_mode = "approve"
+
+[plugins."bitwarden-agent-safe".mcp_servers.bitwarden_safe.tools.lock]
+approval_mode = "approve"
+
+[plugins."bitwarden-agent-safe".mcp_servers.bitwarden_safe.tools.list_item_metadata]
+approval_mode = "approve"
+
+[plugins."bitwarden-agent-safe".mcp_servers.bitwarden_safe.tools.get_item_metadata]
+approval_mode = "approve"
+
+[plugins."bitwarden-agent-safe".mcp_servers.bitwarden_safe.tools.profile_list]
+approval_mode = "approve"

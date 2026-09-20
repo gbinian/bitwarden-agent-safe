@@ -1,0 +1,29 @@
+name: dependency-security-maintenance
+
+on:
+  schedule:
+    - cron: "17 1 * * *"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - package.json
+      - package-lock.json
+
+permissions:
+  contents: read
+
+jobs:
+  audit-and-freshness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Reject known high or critical production vulnerabilities
+        run: npm audit --omit=dev --audit-level=high --registry=https://registry.npmjs.org
+      - name: Require current Bitwarden CLI and MCP releases
+        run: npm outdated @bitwarden/cli @bitwarden/mcp-server --registry=https://registry.npmjs.org

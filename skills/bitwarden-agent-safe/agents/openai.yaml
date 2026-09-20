@@ -1,0 +1,13 @@
+interface:
+  display_name: "Bitwarden Agent Safe"
+  short_description: "Use Bitwarden without exposing secrets to Codex"
+  brand_color: "#175DDC"
+  default_prompt: "Use $bitwarden-agent-safe to check Bitwarden safely and run an approved credential-backed profile."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "bitwarden_safe"
+      description: "Least-privilege facade over the official Bitwarden MCP server"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true

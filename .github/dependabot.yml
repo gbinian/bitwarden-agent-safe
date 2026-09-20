@@ -1,0 +1,19 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: daily
+      time: "09:00"
+      timezone: Asia/Shanghai
+    allow:
+      - dependency-name: "@bitwarden/cli"
+        dependency-type: direct
+      - dependency-name: "@bitwarden/mcp-server"
+        dependency-type: direct
+    open-pull-requests-limit: 4
+    versioning-strategy: increase
+    commit-message:
+      prefix: "deps(bitwarden)"
+

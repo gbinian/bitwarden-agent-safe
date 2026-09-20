@@ -1,0 +1,17 @@
+{
+  "name": "example-staging-command",
+  "description": "Replace every path and Bitwarden item ID before proposing this profile.",
+  "executable": "/absolute/path/to/node",
+  "args": ["/absolute/path/to/reviewed-script.mjs"],
+  "cwd": "/absolute/path/to/project",
+  "watchedFiles": ["/absolute/path/to/reviewed-script.mjs"],
+  "secretBindings": [
+    {
+      "env": "SERVICE_TOKEN",
+      "itemId": "exact-bitwarden-item-id",
+      "field": "password"
+    }
+  ],
+  "timeoutSeconds": 300,
+  "outputPolicy": "status-only"
+}

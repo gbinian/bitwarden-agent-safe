@@ -1,0 +1,28 @@
+{
+  "name": "bitwarden-agent-safe",
+  "version": "0.1.0+codex.20260920103737",
+  "license": "MIT",
+  "description": "A least-privilege Codex safety layer over the official Bitwarden MCP server.",
+  "author": {
+    "name": "Bitwarden Agent Safe contributors"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Bitwarden Agent Safe",
+    "shortDescription": "Use Bitwarden without exposing vault secrets to Codex.",
+    "longDescription": "Runs the official Bitwarden MCP server behind a deny-by-default safety facade. It exposes session controls, redacted item metadata, generated-password writes, and explicitly approved credential-backed execution profiles.",
+    "developerName": "Bitwarden Agent Safe contributors",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Automation"
+    ],
+    "defaultPrompt": [
+      "Connect my Bitwarden account securely and check whether the vault is ready.",
+      "List redacted Bitwarden item metadata.",
+      "Run an approved Bitwarden-backed automation profile."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}
