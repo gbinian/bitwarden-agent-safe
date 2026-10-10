@@ -13,3 +13,10 @@ Underlying filesystem, CLI, and upstream MCP error details are suppressed at the
 This plugin restricts the MCP tool surface; it is not an operating-system sandbox. A general-purpose shell running as the same user could still invoke `bw` directly or modify plugin data. For a hard boundary, the host policy must deny unapproved shell access to the Bitwarden CLI and plugin data, or the facade must run under a separate restricted OS identity. The packaged skill and Codex tool policy are defense in depth, not substitutes for OS isolation.
 
 Report suspected vulnerabilities without including real credentials, vault exports, or session tokens.
+
+Dependency checks run with `npm run audit:security`. Two upstream advisories
+currently have time-limited, version- and hash-pinned unreachable exceptions;
+the packages remain affected in raw npm audit output. See
+[the reachability review](docs/dependency-reachability.md) for evidence,
+limitations, expiry, and removal conditions. Any other high/critical advisory
+or change to reviewed runtime artifacts fails CI.

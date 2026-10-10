@@ -70,7 +70,13 @@ See the packaged skill references for the profile schema and security boundaries
 
 The official Bitwarden CLI and MCP server remain exact-version pinned for reproducibility. Dependabot checks both packages every day and opens separate update pull requests. Each update must pass the macOS and Windows facade tests before human review and merge; dependency updates are never auto-merged.
 
-A separate daily workflow checks the public npm advisory database for high or critical production vulnerabilities and fails when either Bitwarden package is no longer current. Known vulnerable CLI transitive dependencies are overridden to reviewed patched releases until Bitwarden incorporates those versions upstream. Do not run `npm audit fix --force`: npm may propose downgrading the calendar-versioned Bitwarden CLI to an older incompatible release.
+A separate daily workflow checks the public npm advisory database for unreviewed high or critical production vulnerabilities and fails when either Bitwarden package is no longer current. Known vulnerable transitive dependencies are overridden to reviewed patched releases when available until upstream incorporates those versions. Do not run `npm audit fix --force`: npm may propose downgrading the calendar-versioned Bitwarden CLI to an older incompatible release.
+
+Run `npm run audit:security` for the enforced security gate. Two unpatched
+upstream advisories currently have explicit, expiring exceptions based on
+version- and hash-pinned evidence that the vulnerable operations are unreachable
+in this facade. Raw npm audit still reports them; all new high/critical findings
+fail the gate. See [dependency reachability](docs/dependency-reachability.md).
 
 ## Distribution
 
