@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "reviewed": "2026-10-10",
+  "expires": "2026-11-09T00:00:00Z",
+  "documentation": "docs/dependency-reachability.md",
+  "packages": {
+    "node_modules/@bitwarden/cli": "2026.9.1",
+    "node_modules/@bitwarden/mcp-server": "2026.7.0",
+    "node_modules/@modelcontextprotocol/sdk": "1.31.0",
+    "node_modules/node-forge": "1.4.0",
+    "node_modules/braces": "3.0.3",
+    "node_modules/shx": "0.4.0",
+    "node_modules/shelljs": "0.9.2",
+    "node_modules/fast-glob": "3.3.3",
+    "node_modules/micromatch": "4.0.8"
+  },
+  "evidence": {
+    "node_modules/@bitwarden/cli/build": "6c6ea3b241534c10918e07b2b7872192ee800db84dfecf7c035174352bf33012",
+    "node_modules/@bitwarden/mcp-server/dist": "95d85f8e9772b43aa238d2ecb6e9bb3b7064ab8ee6fa0b45be0ecb21eeb0695b",
+    "server": "ddc8f538e11e22ea9af911dbf874c69e8f6aaca64c97e7c19289d59642a15557",
+    "scripts/setup.mjs": "acfa9f1dc7f77a1fa10ff05251f8ac4e431977277d4df17bc5ae031c1617117c",
+    "scripts/launch-bitwarden-safe-mcp": "b57a81e0f2d2b383ccea118731ddf77cd5699938c9457da09363582f381ee06a",
+    "scripts/launch-bitwarden-safe-mcp.cmd": "93185d51304186976d25207e54b19cf11806d40eae757ca260a525dfca9b5511"
+  },
+  "exceptions": [
+    {
+      "package": "braces",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "range": "<=3.0.3",
+      "severity": "high",
+      "reason": "Only imported through the upstream shx build tool; no runtime import from the reviewed MCP dist or facade. Installation disables lifecycle scripts."
+    },
+    {
+      "package": "node-forge",
+      "url": "https://github.com/advisories/GHSA-86w9-cpqp-85rv",
+      "range": "<=1.4.0",
+      "severity": "high",
+      "reason": "The reviewed CLI bundles load node-forge but never call its RSA PKCS#1 v1.5 signature verification API. The facade uses Node crypto for profile signatures."
+    }
+  ]
+}

@@ -8,6 +8,13 @@ on:
     paths:
       - package.json
       - package-lock.json
+      - policies/dependency-reachability.json
+      - scripts/audit-security.mjs
+      - scripts/lib/security-audit.mjs
+      - scripts/setup.mjs
+      - scripts/launch-bitwarden-safe-mcp*
+      - server/**
+      - .github/workflows/**
 
 permissions:
   contents: read
@@ -23,7 +30,7 @@ jobs:
           cache: npm
           registry-url: https://registry.npmjs.org
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Reject known high or critical production vulnerabilities
-        run: npm audit --omit=dev --audit-level=high --registry=https://registry.npmjs.org
+      - name: Reject unreviewed high or critical production vulnerabilities
+        run: npm run audit:security
       - name: Require current Bitwarden CLI and MCP releases
         run: npm outdated @bitwarden/cli @bitwarden/mcp-server --registry=https://registry.npmjs.org
