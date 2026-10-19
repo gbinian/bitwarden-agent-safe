@@ -9,7 +9,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@bitwarden/cli": "2026.9.1",
+    "@bitwarden/cli": "2026.10.0",
     "@bitwarden/mcp-server": "2026.7.0",
     "@modelcontextprotocol/sdk": "1.31.0"
   },
